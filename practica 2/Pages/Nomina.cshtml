@@ -1,0 +1,60 @@
+﻿@page
+@model practica_2.Pages.NominaModel
+@{
+
+    List<NominaModel> nomina = new List<NominaModel>()
+{
+
+      new NominaModel() { nombre = "Plinio", apellido = "Palmer", cargo = "Jefe de encargado", sueldo = 47000.00 },
+      new NominaModel() { nombre = "Julio", apellido = "Palmer", cargo = "Jefe de Almacen", sueldo = 50000.00 },
+      new NominaModel() { nombre = "Dawin", apellido = "Peña", cargo = "Programador", sueldo = 55000.00 },
+      new NominaModel() { nombre = "Maxwell", apellido = "Taverez", cargo = "Programador", sueldo = 55000.00 },
+      new NominaModel() { nombre = "Edickson", apellido = "Sanchez", cargo = "Soporte de Redes", sueldo = 40000.00 },
+     
+
+
+
+    };
+
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Cargo</th>
+            <th scope="col">Salario</th>
+            <th scope="col">descuento AFP</th>
+            <th scope="col">Descuento SFS</th>
+            <th scope="col">descuento ISR</th>
+            <th scope="col">total de descuentos</th>
+            <th scope="col">Salario Neto</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in nomina)
+        {
+        <tr>
+            <td>@item.nombre</td>
+            <td>@item.apellido</td>
+            <td>@item.cargo</td>
+            <td>@item.sueldo</td>
+            <td>@item.AFP()</td>
+            <td>@item.SFS()</td>
+            <td>@Math.Round(item.ISR())</td>
+            @{double totalDecuentos = (item.ISR() + item.AFP() + item.SFS()); }
+            <td>@Math.Round(totalDecuentos)</td>
+            <td>@Math.Round((item.sueldo - totalDecuentos))</td>
+        </tr>
+
+        }
+       
+    </tbody>
+</table>
+
+}
+
+
+
